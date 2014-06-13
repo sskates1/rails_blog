@@ -12,24 +12,6 @@
   Categories: <%= @article.category_names %>
 </p>
 
-<h4>Add a Comment</h4>
-
-<form action="/articles/<%= @article.id %>/comments" method="post">
-  <div>
-    <label>Comment</label>
-    <input name="body" value="<%= params[:body] %>">
-  </div>
-
-  <div>
-    <label>Author</label>
-    <input name="author" value="<%= params[:author] %>">
-  </div>
-
-  <div>
-    <input type="submit" value="Submit">
-  </div>
-</form>
-
 <h4>Comments</h4>
 
 <% @article.comments.each do |comment| %>
@@ -38,3 +20,12 @@
   </p>
 <% end %>
 
+<%= form_for [@article, @comment] do |f| %>
+  <%= f.label :author %>:
+  <%= f.text_field :author %><br>
+
+  <%= f.label :body %>:
+  <%= f.text_area :body %><br>
+
+  <%= f.submit %>
+<% end %>
